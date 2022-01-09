@@ -57,16 +57,16 @@ app = Flask(__name__)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    request = request.get_json()
+    data = request.get_json()
     try:
-        _id = request['observation_id']
+        _id = data['observation_id']
     except:
         _id = None
         error = 'observation_id'
         return {"observation_id": _id, "error": error}
 
     try:
-        obs = request['data']
+        obs = data['data']
     except:
         error = 'data'
         return {"observation_id": _id, "error": error}
@@ -96,7 +96,8 @@ def predict():
         "probability": proba
     }
 
-    return response
+    print (response)
+
 
 
     # What is this code doing? When we receive a new prediction request,
